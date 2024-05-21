@@ -55,49 +55,58 @@ public class FrontEnd implements ActionListener{
 		mpic.add(label1);
 		
 		
+				
+		
 		mplay.setBounds(200, 270, 550, 150);
 		mplay.setBackground(Color.PINK);  
 		mplay.setBorder(BorderFactory.createRaisedBevelBorder());;
 		mplay.setLayout(null); // Set layout to null to use absolute positioning
-
 
 		
 		ImageIcon icon1 = new ImageIcon("images.png");
 		Image image = icon1.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		icon1 = new ImageIcon(newimg);  // transform it back
-
 		button.setIcon(icon1);
 		button.addActionListener(this);
 		button.setBounds(200, 30, 150, 75); 
-		
 		mplay.add(button);
+		
+		
+		
+		
 		
 		
 		newPage.setBounds(150, 150, 100, 75);
 		newPage.setBorder(BorderFactory.createBevelBorder(0));
-		newPage.setFocusable(false);
 		newPage.addActionListener(this);
 		frame.add(newPage);
 		
 		
 		
+		
+		
+		
+		
 		ref.setBounds(750, 150, 85, 75);
 		ref.setBorder(BorderFactory.createBevelBorder(0));
-		ref.setFocusable(false);
 		ImageIcon icon2 = new ImageIcon("img.png");
 		Image image1 = icon2.getImage();
 		Image newimg1 = image1.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
-		icon2 = new ImageIcon(newimg1);
-				
+		icon2 = new ImageIcon(newimg1);		
 		ref.setIcon(icon2);
 		ref.addActionListener(this);
-		frame.add(ref);
-		
-		
-		
+		frame.add(ref);	
 		frame.add(mpic);
 		frame.add(mplay);
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		frame.setLayout(null);
 		frame.setTitle("MusicPlayer");
@@ -105,6 +114,11 @@ public class FrontEnd implements ActionListener{
 		frame.setSize(1000,500);
 		frame.setResizable(false);
 		frame.setVisible(true);
+		
+		
+		
+		
+
 		
 		frame.addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
@@ -119,7 +133,11 @@ public class FrontEnd implements ActionListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.dispose();
 	}
-
+	
+	
+	
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -172,3 +190,4 @@ public class FrontEnd implements ActionListener{
 	
 	}
 
+	
