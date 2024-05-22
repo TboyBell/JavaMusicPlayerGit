@@ -36,6 +36,37 @@ public class FrontEnd implements ActionListener{
 	MusicList musiclist = new MusicList();
 	
 	
+	
+	
+	public Clip playMusic(String music) {
+        File file = new File(music);
+        if (!file.exists()) {
+            System.err.println("File not found: " + music);
+            return null;
+        }
+
+        try (AudioInputStream audio = AudioSystem.getAudioInputStream(file)) {
+            Clip clip = AudioSystem.getClip();
+            clip.open(audio);
+            clip.start();
+           // clip.loop(Clip.LOOP_CONTINUOUSLY);;
+            /*clip.addLineListener(event -> {
+                if (event.getType() == javax.sound.sampled.LineEvent.Type.STOP)
+                    clip.close(); // Close the clip when it stops playing
+            });*/
+            return clip;
+        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
+            System.err.println("Error playing " + music + ": " + e.getMessage());
+        }
+		return null;
+    }
+	
+	
+	
+	
+	
+	
+	
 	FrontEnd() {
 		
 	    
@@ -110,29 +141,52 @@ public class FrontEnd implements ActionListener{
 		
 		frame.setLayout(null);
 		frame.setTitle("MusicPlayer");
-		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setSize(1000,500);
 		frame.setResizable(false);
-		frame.setVisible(true);
 		
 		
 		
+		
+		
+		// Closing Function
 		
 
-		
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
 		frame.addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
 			public void windowClosing(java.awt.event.WindowEvent WindowEvent) {
 				exitApplication();
 			}
-		});
 		
 		}
+		
+				);
+		
+		
+	
+	
+		frame.setVisible(true);
+	
+	
+	}
+	
+	
+	
+	
+	
+	// METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS
+	
+	
+	
+	
 	
 	public void exitApplication() {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.dispose();
 	}
+	
+	
 	
 	
 	
@@ -165,28 +219,14 @@ public class FrontEnd implements ActionListener{
 		}
 	}
 	
-	public Clip playMusic(String music) {
-        File file = new File(music);
-        if (!file.exists()) {
-            System.err.println("File not found: " + music);
-            return null;
-        }
-
-        try (AudioInputStream audio = AudioSystem.getAudioInputStream(file)) {
-            Clip clip = AudioSystem.getClip();
-            clip.open(audio);
-            clip.start();
-           // clip.loop(Clip.LOOP_CONTINUOUSLY);;
-            /*clip.addLineListener(event -> {
-                if (event.getType() == javax.sound.sampled.LineEvent.Type.STOP)
-                    clip.close(); // Close the clip when it stops playing
-            });*/
-            return clip;
-        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
-            System.err.println("Error playing " + music + ": " + e.getMessage());
-        }
-		return null;
-    }
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	}
 

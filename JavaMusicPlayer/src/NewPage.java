@@ -35,6 +35,8 @@ public class NewPage implements ActionListener {
 		
 		
 		
+		
+		
 		title.setBounds(75, 0, 450, 50);
 		title.setFont(new Font("Arial Black",Font.ITALIC,45));
 		
@@ -48,6 +50,12 @@ public class NewPage implements ActionListener {
 		
 		title.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 		frame.add(title);
+		
+		
+		
+		
+		
+		
 		
 		
 		list.setLayout(new BorderLayout());
