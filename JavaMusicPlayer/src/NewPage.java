@@ -53,16 +53,31 @@ public class NewPage implements ActionListener {
 		
 		
 		
-		
-		
-		
-		
+	
 		
 		list.setLayout(new BorderLayout());
 		list.setBounds(0, 100, 250, 250);
 		list.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		
 
+		ref.setBounds(350, 200, 85, 75);
+		ref.setBorder(BorderFactory.createBevelBorder(0));
+		ref.setFocusable(false);
+		ImageIcon icon2 = new ImageIcon("img.png");
+		Image image1 = icon2.getImage();
+		Image newimg1 = image1.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
+		icon2 = new ImageIcon(newimg1);
+				
+		ref.setIcon(icon2);
+		ref.addActionListener(this);
+		frame.add(ref);
+		
+		
+		
+		
+		
+		
+		
 		MusicList List = new MusicList();
 		JList <String> itemList = new JList<String>(List.musicFolder.toArray(new String[0]));
 		JScrollPane pane = new JScrollPane(itemList);
@@ -86,44 +101,46 @@ public class NewPage implements ActionListener {
 		frame.add(add.setmusic);
 		
 		
-		ref.setBounds(350, 200, 85, 75);
-		ref.setBorder(BorderFactory.createBevelBorder(0));
-		ref.setFocusable(false);
-		ImageIcon icon2 = new ImageIcon("img.png");
-		Image image1 = icon2.getImage();
-		Image newimg1 = image1.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
-		icon2 = new ImageIcon(newimg1);
-				
-		ref.setIcon(icon2);
-		ref.addActionListener(this);
-		frame.add(ref);
+		
+		
 		
 		
 		
 		
 		frame.setSize(500, 500);
 		frame.setTitle("Playlist");
-		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setLayout(null);
-		frame.setVisible(true);
+	
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
 		frame.addWindowListener(new java.awt.event.WindowAdapter() {
 			@Override
 			public void windowClosing(java.awt.event.WindowEvent WindowEvent) {
 				exitApplication();
-				
 			}
 
 			
-		});
+			
+		} );
+		
+		frame.setVisible(true);
+
 	}
+		
+	
+	
+		
+	// METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS	
 	
 	public void exitApplication() {
 		frame.dispose();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 	}
-
+		
+		
+		
+		
+		
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
