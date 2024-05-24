@@ -17,26 +17,27 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EtchedBorder;
 
 public class NewPage implements ActionListener {
+	
+	// Frame, Panel, Label, Button.
 
 	JFrame frame = new JFrame();
 	JButton Back = new JButton("Back");
 	JLabel title = new JLabel("PlayList Java");
 	JPanel list = new JPanel();
-	JButton ref = new JButton();
+	JButton refresh = new JButton();
 	
 	NewPage() {
 		
+		// Code For Back Button.
 		Back.setBounds(0, 0, 75, 75);
 		Back.setBorder(BorderFactory.createLineBorder(Color.WHITE));
 		Back.setBorder(BorderFactory.createBevelBorder(0));
 		Back.addActionListener(this);
 		frame.add(Back);
+		//---------------------------------------------------------------
 		
 		
-		
-		
-		
-		
+		// Code For Title Display.
 		title.setBounds(75, 0, 450, 50);
 		title.setFont(new Font("Arial Black",Font.ITALIC,45));
 		
@@ -51,39 +52,39 @@ public class NewPage implements ActionListener {
 		title.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 		frame.add(title);
 		
-		
+		//-----------------------------------------------------------------------------------
 		
 	
-		
-		list.setLayout(new BorderLayout());
-		list.setBounds(0, 100, 250, 250);
-		list.setBorder(BorderFactory.createRaisedSoftBevelBorder());
-		
-
-		ref.setBounds(350, 200, 85, 75);
-		ref.setBorder(BorderFactory.createBevelBorder(0));
-		ref.setFocusable(false);
+	
+		// Refresh Button.
+		refresh.setBounds(350, 200, 85, 75);
+		refresh.setBorder(BorderFactory.createBevelBorder(0));
+		refresh.setFocusable(false);
 		ImageIcon icon2 = new ImageIcon("img.png");
 		Image image1 = icon2.getImage();
 		Image newimg1 = image1.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
 		icon2 = new ImageIcon(newimg1);
 				
-		ref.setIcon(icon2);
-		ref.addActionListener(this);
-		frame.add(ref);
+		refresh.setIcon(icon2);
+		refresh.addActionListener(this);
+		frame.add(refresh);
+		
+		//--------------------------------------------------------------------------------------
 		
 		
 		
 		
+		// Block of Code For List
+		list.setLayout(new BorderLayout());
+		list.setBounds(0, 100, 250, 250);
 		
-		
-		
+		list.setBorder(BorderFactory.createRaisedSoftBevelBorder());
 		MusicList List = new MusicList();
 		JList <String> itemList = new JList<String>(List.musicFolder.toArray(new String[0]));
 		JScrollPane pane = new JScrollPane(itemList);
 		list.add(pane); // Should Use (BorderLayout.(North, South, West, East));
 		
-		frame.add(list);
+		
 		
 		/* Here are some other examples of components that can be placed inside a JScrollPane:
 		 * JTable: A component used to display data in a tabular format.
@@ -94,18 +95,14 @@ public class NewPage implements ActionListener {
 		 *  to create more complex scrollable layouts.*/
 		
 		
-		
-		
-		InputMusic add = new InputMusic();
-		add.setmusic.setBounds(350, 100, 100, 50);
-		frame.add(add.setmusic);
+		//--------------------------------------------------------------------------------------------
+
 		
 		
 		
+		// Frame Functions.
 		
-		
-		
-		
+		frame.add(list);
 		
 		frame.setSize(500, 500);
 		frame.setTitle("Playlist");
@@ -124,7 +121,9 @@ public class NewPage implements ActionListener {
 		} );
 		
 		frame.setVisible(true);
-
+		
+		//-------------------------------------------------------------------------------------
+		
 	}
 		
 	
@@ -132,6 +131,8 @@ public class NewPage implements ActionListener {
 		
 	// METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS	
 	
+	
+	// Extension Of Closing Functions.
 	public void exitApplication() {
 		frame.dispose();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -148,7 +149,7 @@ public class NewPage implements ActionListener {
 			frame.dispose();
 			FrontEnd main = new FrontEnd();
 		}
-		else if(e.getSource()==ref) {
+		else if(e.getSource()==refresh) {
 			frame.dispose();
 			NewPage np = new NewPage();
 		}
