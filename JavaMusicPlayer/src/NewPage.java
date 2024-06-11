@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -73,15 +74,31 @@ public class NewPage implements ActionListener {
 		
 		
 		
-		
-		// Block of Code For List
-		list.setLayout(new BorderLayout());
+		//list is a JPanel.
+		// Block of Code For List.
 		list.setBounds(0, 100, 250, 250);
+		list.setLayout(new BorderLayout());
+		list.setBorder(BorderFactory.createSoftBevelBorder(0));
 		
-		list.setBorder(BorderFactory.createRaisedSoftBevelBorder());
-		MusicList List = new MusicList();
-		JList <String> itemList = new JList<String>(List.musicFolder.toArray(new String[0]));
-		JScrollPane pane = new JScrollPane(itemList);
+
+		// Array that holds the music path,
+		// To put in JList.
+		ArrayList<String> item = new ArrayList<>();
+		item.add("Harry-Belafonte-Jump-in-the-Line.wav");
+		item.add("Pheelz_Buju_BNXN_-_Finesse.wav");
+		item.add("Post-Malone-Swae-Lee-Sunflower-Instrumental-Prod.-By-Carter-Lang-Louis-Bell.wav");
+		item.add("Redbone-Instrumental.wav");
+		item.add("Kendrick-Lamar-how-much-a-dollar-cost-(HipHopKit.com).wav");
+		item.add("JID-feat-Denzel-Curry-Bruuuh-Remix-(HipHopKit.com).wav");
+		item.add("03DeadWrong.wav");
+	    item.add("21_Savage_-_a_lot_FlexyOkay.com.wav");
+	    item.add("Baby-Keem-16-(HipHopKit.com).wav");
+	    item.add("Baby-Keem-ORANGE-SODA-(HipHopKit.com).wav");
+	    
+		
+		JList <String> itemList = new JList<String>(item.toArray(new String[0]));		
+		
+	    JScrollPane pane = new JScrollPane(itemList);
 		list.add(pane); // Should Use (BorderLayout.(North, South, West, East));
 		
 		
@@ -97,6 +114,9 @@ public class NewPage implements ActionListener {
 		
 		//--------------------------------------------------------------------------------------------
 
+		
+		
+		
 		
 		
 		
