@@ -1,252 +1,161 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.sound.sampled.*;
+import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.BevelBorder;
+public class FrontEnd implements ActionListener {
 
-public class FrontEnd implements ActionListener{
+    JFrame frame = new JFrame(); // For the Frame
+    JButton page = new JButton("ReadMe");
+    JButton playButton = new JButton();
+    ArrayList<String> list = new ArrayList<>();
+  
 
-	JFrame frame = new JFrame(); // For the Frame
-	JPanel ppic = new JPanel();  // For the panel that holds the picture.
-	JPanel pplay = new JPanel(); // For the panel that holds the play button. 
-	
-	// Play buttons.
-	JButton button = new JButton(); 
-	JButton newPage = new JButton("Playlist");
-	JButton reload = new JButton();
-	
-	
-	
-	// Class that Holds Music Files. See MusicList.Java
-	MusicList musiclist = new MusicList();
-	
-	
-	
-	// Play Music Code 1.
-	public Clip playMusic(String music) {
-        File file = new File(music);
-        if (!file.exists()) {
-            System.err.println("File not found: " + music);
-            return null;
-        }
+    FrontEnd() {
 
-        try (AudioInputStream audio = AudioSystem.getAudioInputStream(file)) {
-            Clip clip = AudioSystem.getClip();
-            clip.open(audio);
-            clip.start();
-           // clip.loop(Clip.LOOP_CONTINUOUSLY);;
-            /*clip.addLineListener(event -> {
-                if (event.getType() == javax.sound.sampled.LineEvent.Type.STOP)
-                    clip.close(); // Close the clip when it stops playing
-            });*/
-            return clip;
-        } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
-            System.err.println("Error playing " + music + ": " + e.getMessage());
-        }
-		return null;
+        frame.setLayout(new BorderLayout());
+        
+        
+        page.addActionListener(this);
+
+        // Code for Java Title
+        JLabel title = new JLabel("Java Music Player");
+        title.setFont(new Font("Franklin Gothic Medium", Font.ITALIC, 40));
+        title.setBorder(new CompoundBorder(
+                new BevelBorder(BevelBorder.RAISED),
+                new EmptyBorder(10, 10, 10, 10)
+        ));
+
+        page.setFont(new Font("Franklin Gothic Medium", Font.ITALIC, 20));
+        page.setFocusable(false);
+
+        JPanel panel = new JPanel();
+        panel.add(title);
+        panel.add(page);
+        frame.add(panel, BorderLayout.PAGE_START);
+
+        // Music List
+        list.add("Harry-Belafonte-Jump-in-the-Line.wav");
+        list.add("Pheelz_Buju_BNXN_-_Finesse.wav");
+        list.add("Post-Malone-Swae-Lee-Sunflower-Instrumental-Prod.-By-Carter-Lang-Louis-Bell.wav");
+        list.add("Redbone-Instrumental.wav");
+        list.add("Kendrick-Lamar-how-much-a-dollar-cost-(HipHopKit.com).wav");
+        list.add("JID-feat-Denzel-Curry-Bruuuh-Remix-(HipHopKit.com).wav");
+        list.add("03DeadWrong.wav");
+        list.add("21_Savage_-_a_lot_FlexyOkay.com.wav");
+        list.add("Baby-Keem-16-(HipHopKit.com).wav");
+        list.add("Baby-Keem-ORANGE-SODA-(HipHopKit.com).wav");
+
+
+        JList<String> temp = new JList<>(list.toArray(new String[0]));
+        JScrollPane pane = new JScrollPane(temp);
+        JPanel scroll = new JPanel(new BorderLayout());
+        scroll.add(pane, BorderLayout.CENTER);
+        frame.add(scroll, BorderLayout.CENTER);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(null);
+        buttonPanel.setPreferredSize(new Dimension(500, 50));
+
+        playButton.setBounds(200, 0, 100, 50);
+        
+
+        ImageIcon image = new ImageIcon("images.png");
+        Image img = image.getImage();
+        Image imag = img.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
+        image = new ImageIcon(imag);
+        playButton.setIcon(image);
+
+        buttonPanel.add(playButton);
+
+        playButton.addActionListener(this);
+        
+
+        frame.add(buttonPanel, BorderLayout.PAGE_END);
+
+        
+        
+        
+        
+        
+        
+        
+        frame.setTitle("Music-Player");
+        frame.pack();
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                exitApplication();
+            }
+        });
+
+        frame.setVisible(true);
     }
-	
-	
-	
-	
-	
-	
-	
-	FrontEnd() {
-		
-	    
-		// This Body Of Code Contains Functions For The Music Picture/Name.
-		
-		ppic.setBounds(350, 0, 250, 250);
-		JLabel label1 = new JLabel();
-		label1.setText("Feelz GOOD");
-		label1.setVerticalTextPosition(JLabel.BOTTOM);
-		label1.setHorizontalTextPosition(JLabel.CENTER);
-		label1.setFont(new Font("Arial Black",Font.ITALIC,20));
-		label1.setForeground(Color.RED);
-		
-		// This Block Of Code Scales the Picture To Perfect Height.
-		ImageIcon icon = new ImageIcon("guitar.png");
-		Image img = icon.getImage();
-		Image newi = img.getScaledInstance(250, 200,  java.awt.Image.SCALE_SMOOTH);
-		icon = new ImageIcon(newi);
-		label1.setIcon(icon);
-		label1.setIconTextGap(-35);
-		ppic.add(label1);
-		//-----------------------------------------------------------
-		
-			
-		
-		
-		
-		
-		// This Body Of Code Contains Functions For The Play Buttons.
-		
-		pplay.setLayout(null); // Set layout to null to use absolute positioning
-		pplay.setBounds(200, 270, 550, 150);
-		pplay.setBackground(Color.PINK);  
-		pplay.setBorder(BorderFactory.createRaisedBevelBorder());;
+    
+    
+    
+    
 
-		
-		ImageIcon icon1 = new ImageIcon("images.png");
-		Image image = icon1.getImage(); // transform it 
-		Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		icon1 = new ImageIcon(newimg);  // transform it back
-		
-		button.setIcon(icon1);
-		button.addActionListener(this);
-		button.setBounds(200, 30, 150, 75); 
-		pplay.add(button);
-		
-		//----------------------------------------------------------------------------------------
-		
-		
-		
-		
-		
-		
-		// This Is The Button For A New Page
-		newPage.setBounds(150, 150, 100, 75);
-		newPage.setBorder(BorderFactory.createBevelBorder(0));
-		newPage.addActionListener(this);
-		frame.add(newPage);
-		//-----------------------------------------------------
-		
-		
-		
-		
-		
-		// This Body Of Code Contains Functions For The Reload Picture.
-		
-		reload.setBounds(750, 150, 85, 75);
-		reload.setBorder(BorderFactory.createBevelBorder(0));
-		ImageIcon icon2 = new ImageIcon("img.png");
-		Image image1 = icon2.getImage();
-		Image newimg1 = image1.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
-		
-		icon2 = new ImageIcon(newimg1);		
-		reload.setIcon(icon2);
-		reload.addActionListener(this);
-		//-----------------------------------------------------------------------------------
-		
-		
-		
-		// This Body Of Code Contains Functions For The Frame It Self.
-		frame.add(reload);	
-		frame.add(ppic);
-		frame.add(pplay);
-		
-		// Preferences
-		
-		frame.setLayout(null);
-		frame.setTitle("MusicPlayer");
-		frame.setSize(1000,500);
-		frame.setResizable(false);
-		
-		
-		
-		
-		
-		// Closing Function
-		
+    private void exitApplication() {
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.dispose();
+    }
 
-		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    
+    public Clip playMusic(String music) {
+        try {
+            File file = new File(music);
+            if (file.exists()) {
+                AudioInputStream audio = AudioSystem.getAudioInputStream(file);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audio);
+                clip.start();
+                return clip;
+            } else {
+                System.out.println("Can't Find File");
+            }
+        } catch (Exception e) {
+            System.out.println("Can't Play File: " + e.getMessage());
+        }
+        return null;
+    }
 
-		frame.addWindowListener(new java.awt.event.WindowAdapter() {
-			@Override
-			public void windowClosing(java.awt.event.WindowEvent WindowEvent) {
-				exitApplication();
-			}
-		
-		}
-		
-				);
-		
-		
-	
-	
-		frame.setVisible(true);
-	
-	//----------------------------------------------------------------------------------------------
-		
-	}
-	
-	
-	
-	
-	
-	// METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS METHODS
-	
-	
-	
-	// Continuation Of Closing Functions.
-	public void exitApplication() {
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.dispose();
-	}
-	
-	
-	
-	// Actions/ Tasks Code.
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-		if(e.getSource()==button) {
-
-			// Action For Play Music.
-	        for(int i = 0; i < musiclist.musicFolder.size(); i++) {
-	        	System.out.println("Playing" + musiclist.musicFolder.get(i));
-	        	Clip currentClip = playMusic(musiclist.musicFolder.get(i));
-	        	while(currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
-	        		
-	        	}
-	        	
-	        }
-	        
-		}
-		
-		// Action For New Page.
-		else if(e.getSource()==newPage) {
-			frame.dispose();
-    		NewPage page = new NewPage();
+    
+    public void actionPerformed(ActionEvent e) {
+    
+    	if(e.getSource()==playButton) {
     		
+    		try {
+    			for(int i = 0; i < list.size(); i++) {
+    				System.out.println("Playing "+ list.get(i));
+    				 Clip currentClip = playMusic(list.get(i));
+    				while(currentClip.getMicrosecondLength() != currentClip.getMicrosecondPosition()) {
+    					
+    				}
+    			}
+    		}
+    		catch(Exception e1){
+    			System.out.println("File Not Found "+e1.getMessage());
+    		}
     	}
-		
-		// Action For Reload Page.
-		else if(e.getSource()==reload) {
-			frame.dispose();
-			FrontEnd fe = new FrontEnd();
-		}
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	}
-
-	
+    
+    	
+    	
+    	
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+}
