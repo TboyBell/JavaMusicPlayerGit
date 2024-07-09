@@ -15,7 +15,7 @@ public class FrontEnd implements ActionListener {
     JButton playButton = new JButton();
     ArrayList<String> list = new ArrayList<>();
   
-
+    
     FrontEnd() {
 
         frame.setLayout(new BorderLayout());
