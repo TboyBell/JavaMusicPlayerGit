@@ -1,13 +1,16 @@
-# JavaMusicPlayerGit
-A basic MusicPlayer made on JavaFx.
+# Java Music Player Application
 
-I tried to keep this project as simple as possible,
-achieving most of the basics( Play, Stop, And Display Music Availabe).
+## Overview
+This Java Music Player application is my first full project. 
 
-There are kinks to work out like the fact that once the music starts no other button is presseable,
-functions like (Fast Forward and Loop).
-and i belive i could create a function to choose music from your pc, usin the choosefileextension,
-but ultimately i built this in only a day.
+It features a simple graphical user interface (GUI) for playing a list of predefined music files.
 
-P.S, This code can be modified(in the Code), to add your files(Wav) to play whatever music you would like,
-And feel free to work on this project however you would like.
+The application is built using Java Swing for the GUI components and Java Sound API for audio playback. 
+
+It provides a user-friendly interface with a title, a music list, and controls to play the music.
+
+## Features
+- **GUI with Java Swing**: The application uses Java Swing to create a windowed interface, including buttons, labels, and lists.
+- **Audio Playback**: It uses the Java Sound API to handle audio playback of .wav files.
+- **Music List**: A predefined list of music files is displayed in the GUI, allowing users to see the available tracks.
+- **Play Button**: A button to start playing the music files sequentially.
