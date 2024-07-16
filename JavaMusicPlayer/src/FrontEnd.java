@@ -9,7 +9,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class FrontEnd implements ActionListener {
-
     JFrame frame = new JFrame(); // For the Frame
     JButton page = new JButton("ReadMe");
     JButton playButton = new JButton();
