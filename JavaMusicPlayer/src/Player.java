@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -11,6 +12,7 @@ import java.util.Map;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -39,6 +41,10 @@ public class Player {
 				exitApp();
 			}
 		});
+		
+		ImageIcon icon = new ImageIcon("Icon.jpg");
+		frame.setIconImage(icon.getImage());
+		
 		
 		Font font = new Font("Franklin Gothic Medium",Font.ITALIC,15);
 		
