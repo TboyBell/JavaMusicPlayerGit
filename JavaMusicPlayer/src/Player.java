@@ -129,7 +129,7 @@ public class Player {
 		
 		
 		
-		JButton pause = new JButton("Pause");
+		JButton pause = new JButton("Pause");	
 		pause.setFocusable(false);
 		pause.setBounds(320, 70, 100, 30);
 		pause.addActionListener(new ActionListener() {
@@ -149,17 +149,17 @@ public class Player {
 						isPaused = true;
 						pause.setText("Resume");
 					}
-					else if(clip != null && isPaused) {
+					else if(clip != null && isPaused == true) {
 					
 						clip.start();
-						
+						isPaused = false;
+						pause.setText("Pause");
 						if(isLooping) {
 							clip.loop(Clip.LOOP_CONTINUOUSLY);
 						}
 					}
 					
-					isPaused = false;
-					pause.setText("Pause");
+					
 				}			
 		});
 		frame.add(pause);
