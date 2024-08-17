@@ -181,7 +181,7 @@ public class Player {
 				
 				try {
 				isLooping =  !isLooping;
-				if(isLooping) {
+				if(clip != null && isLooping) {
 					loop.setText("UnLoop");
 					
 					if(clip.isRunning()) {
