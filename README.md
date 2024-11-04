@@ -1,4 +1,4 @@
-# Java Music Player Application
+> Java Music Player Application
 
 ## Overview
 This Java Music Player application is my first comprehensive project. It features a straightforward graphical user interface (GUI) for playing a selection of predefined music files.
